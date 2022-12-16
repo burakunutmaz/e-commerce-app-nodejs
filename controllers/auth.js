@@ -6,7 +6,7 @@ exports.getLogin = (req,res,next)=>{
     res.render('auth/login', {
     path: '/login',
     pageTitle: 'login',
-    loggedIn: req.isLoggedIn});
+    loggedIn: req.session.isLoggedIn});
 };
 
 exports.postLogin = (req,res,next)=>{
