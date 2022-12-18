@@ -55,6 +55,9 @@ exports.getCart = (req,res,next) => {
 };
 
 exports.postCart = (req,res,next)=>{
+    if (!req.session.isLoggedIn){
+        res.redirect('/login');
+    }
     const prodId = req.body.productId;
     Product.findById(prodId)
         .then(product => {
@@ -120,5 +123,5 @@ exports.getCheckout = (req,res,next)=>{
     res.render('shop/checkout',
         {pageTitle: 'Checkout',
         path: '/checkout',
-        loggedIn: req.isLoggedIn});  
+        loggedIn: req.session.isLoggedIn});  
 };

@@ -11,7 +11,7 @@ const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI = 'mongodb+srv://burak:burakadmin@cluster0.zp3ye6m.mongodb.net/';
+const MONGODB_URI = 'mongodb+srv://burak:burakadmin@cluster0.zp3ye6m.mongodb.net/test';
 
 const app = express();
 const store = new MongoDBStore({
@@ -30,6 +30,18 @@ app.use(session({
     saveUninitialized: false,
     store: store}));
 
+
+app.use((req,res,next) => {
+    if (!req.session.user){
+        return next();
+    }
+    User.findById(req.session.user._id)
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
+});
 
 
 app.use('/admin', adminRoutes);
