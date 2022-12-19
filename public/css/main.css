@@ -176,3 +176,17 @@ form {
   background: red;
   color: white;
 }
+
+.user-message {
+  margin: auto;
+  width: 50%;
+  border: 1px solid black;
+  padding: 1rem;
+  text-align: center;
+}
+
+.user-message--error {
+  border-color:  darkred;
+  color: darkred;
+  margin: auto;
+}

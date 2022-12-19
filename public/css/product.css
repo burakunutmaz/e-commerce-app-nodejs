@@ -23,7 +23,7 @@
 button{
     font: inherit;
     border: 1px solid rgb(22, 116, 100);
-    color: rgb(22, 116, 100);
+    color: rgb(116, 22, 22);
     background: white;
     border-radius: 3px;
     cursor: pointer;
@@ -31,5 +31,6 @@ button{
 
 button:hover,
 button:active{
-    background: rgb(127, 247, 205);
+    background: rgb(97, 0, 0);
+    color: white;
 }

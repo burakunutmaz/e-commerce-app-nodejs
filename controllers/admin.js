@@ -5,24 +5,41 @@ exports.getAddProduct = (req,res,next) => {
     if (!req.session.isLoggedIn){
         return res.redirect('/login');
     }
+    let message = req.flash('error');
+
+    if (message.length > 0){
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/edit-product',
         {pageTitle:'Add Product',
         path:'/admin/add-product',
         editing: false,
-        loggedIn: req.session.isLoggedIn});
+        loggedIn: req.session.isLoggedIn,
+        errorMessage: message});
 };
 
 exports.postAddProduct =  (req,res,next) => {
     const title = req.body.title;
-    const imageUrl = req.body.imageUrl;
+    const image = req.file;
     const description = req.body.description;
     const price = req.body.price;
+    console.log(image);
+
+    if (!image){
+        return res.status(422).render('admin/edit-product',
+        {pageTitle:'Add Product',
+        path:'/admin/add-product',
+        editing: false,
+        errorMessage: "Attached image is invalid."});
+    }
 
     const product = new Product({
         title: title,
         price: price,
         description: description,
-        imageUrl: imageUrl,
+        imageUrl: "-",
         userId: req.user
     });
     product
@@ -46,8 +63,7 @@ exports.getEditProduct = (req,res,next) => {
             {pageTitle:'Edit Product',
             product: product,
             path:'/admin/add-product',
-            editing: true,
-            loggedIn: req.session.isLoggedIn});
+            editing: true});
         })
         .catch(err => console.log(err));
 
@@ -97,8 +113,7 @@ exports.getAdminProducts = (req,res,next)=>{
             res.render('admin/products',
                 {prods: products, 
                 pageTitle: 'Admin Products',
-                path:'/admin/products',
-                loggedIn: req.session.isLoggedIn});
+                path:'/admin/products'});
         })
         .catch();
 };
