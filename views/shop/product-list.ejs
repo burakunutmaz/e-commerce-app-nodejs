@@ -1,5 +1,6 @@
 <%- include('../includes/head.ejs') %> 
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
@@ -7,6 +8,12 @@
 
 
     <main>
+        <div class="search-area">
+            <form action="" class="search-form" method="POST">
+                <input class="search-form--input" type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
         <% if (prods.length > 0) { %>
         <div class="grid">
             <% for (let product of prods) { %> 
@@ -16,7 +23,7 @@
                     <h1 class="product__title"><%= product.title %></h1>
                 </header>
                 <div class="card__image">
-                    <img src="<%= product.imageUrl %> " alt="<%= product.title %>">
+                    <img src="/<%= product.imageUrl %> " alt="<%= product.title %>">
                 </div>
                 <div class="card__content">
                     <h2 class="product__price">$<%= product.price %></h2>

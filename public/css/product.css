@@ -2,6 +2,13 @@
     width: 20rem;
     max-width: 90%;
     margin: auto;
+    display: block;
+}
+
+.product-item {
+    width: 20rem;
+    max-width: 95%;
+    margin: 1rem;
 }
 
 .form-control {
@@ -15,15 +22,15 @@
 }
 
 .form-control input{
-    border: 1px solid rgb(22, 116, 100);
+    border: 1px solid #690000;
     font: inherit;
     border-radius: 2px;
 }
 
 button{
     font: inherit;
-    border: 1px solid rgb(22, 116, 100);
-    color: rgb(116, 22, 22);
+    border: 1px solid #690000;
+    color: #690000;
     background: white;
     border-radius: 3px;
     cursor: pointer;
@@ -31,6 +38,38 @@ button{
 
 button:hover,
 button:active{
-    background: rgb(97, 0, 0);
+    background: #690000;
     color: white;
 }
+
+form.search-form input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 85%;
+    background: #f1f1f1;
+  }
+  
+  form.search-form button {
+    float: left;
+    width: 15%;
+    padding: 10px;
+    background: #690000;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  
+  form.search-form button:hover {
+    background:rgb(85, 8, 8)
+  }
+  
+  /* Clear floats */
+  form.search-form::after {
+    content: "";
+    clear: both;
+    display: table;
+  }

@@ -35,11 +35,12 @@ exports.postAddProduct =  (req,res,next) => {
         errorMessage: "Attached image is invalid."});
     }
 
+    const imageUrl = image.path;
     const product = new Product({
         title: title,
         price: price,
         description: description,
-        imageUrl: "-",
+        imageUrl: imageUrl,
         userId: req.user
     });
     product
@@ -56,6 +57,13 @@ exports.getEditProduct = (req,res,next) => {
     if (!editMode){
         return res.redirect('/');
     }
+    let message = req.flash('error');
+
+    if (message.length > 0){
+        message = message[0];
+    } else {
+        message = null;
+    }
     const prodId = req.params.productId;
     Product.findById(prodId)
         .then(product => {
@@ -63,7 +71,8 @@ exports.getEditProduct = (req,res,next) => {
             {pageTitle:'Edit Product',
             product: product,
             path:'/admin/add-product',
-            editing: true});
+            editing: true,
+            errorMessage: message});
         })
         .catch(err => console.log(err));
 
@@ -73,14 +82,17 @@ exports.postEditProduct = (req,res,next)=>{
     const prodId = req.body.productId;
     const updatedTitle = req.body.title;
     const updatedPrice = req.body.price;
-    const updatedImageUrl = req.body.imageUrl;
+    const image = req.file;
     const updatedDesc = req.body.description;
 
     Product.findById(prodId)
         .then(product => {
             product.title = updatedTitle;
             product.price = updatedPrice;
-            product.imageUrl = updatedImageUrl;
+            if (image){
+                product.imageUrl = image.path;
+            }
+
             product.description = updatedDesc;
             return product.save()
                 .then(result => {

@@ -29,7 +29,7 @@
             <ul class="main-header__item-list">
                 <% if (!loggedIn) { %>
                     <li class="main-header__item">
-                        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
                     </li>
                     <li class="main-header__item">
                         <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
@@ -38,7 +38,7 @@
                 <li class="main-header__item">
                     <form action="/logout" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button type="submit">Logout</button>
+                        <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     </form>
                 </li>
                 <% } %>
