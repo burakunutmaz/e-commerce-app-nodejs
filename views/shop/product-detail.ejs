@@ -7,11 +7,11 @@
         <h1><%= product.title %> </h1>
         <hr>
 
-        <div>
-            <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+        <div style="width: 50vw; text-align: center; margin:auto;">
+            <img style="width: 50%;" src="/<%= product.imageUrl %>" alt="<%= product.title %>">
         </div>
 
-        <h2><%= product.price %></h2>
+        <h2>$<%= product.price %></h2>
         <p><%= product.description %></p>
         <form action="/cart" method="POST">
             <button class="btn" type="submit">Add to Cart</button>

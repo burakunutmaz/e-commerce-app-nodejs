@@ -3,13 +3,15 @@ const Order = require('../models/order');
 
 const ITEMS_PER_PAGE = 2;
 
-exports.getProducts =  (req,res,next) => {
-    Product.find()
+exports.getProducts = (req,res,next) => {
+    const searchText = req.query.search;
+    Product.find({"title": { $regex: new RegExp(searchText, "i")}})
         .then(products => {
             res.render('shop/product-list',
             {prods: products, 
             pageTitle: 'Products',
-            path:'/products'});
+            path:'/products',
+            searchVal: searchText});
         })
         .catch(err => console.log(err));
 };
