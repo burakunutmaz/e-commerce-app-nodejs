@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "burak",
+        "MONGO_PASSWORD": "burakadmin",
+        "MONGO_DB": "test",
+        "NODEMAILER_KEY": "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"
+    }
+}
