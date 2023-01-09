@@ -20,8 +20,9 @@ const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
+require('dotenv').config();
+
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.zp3ye6m.mongodb.net/${process.env.MONGO_DB}`;
-console.log(MONGODB_URI);
 
 const app = express();
 const store = new MongoDBStore({
